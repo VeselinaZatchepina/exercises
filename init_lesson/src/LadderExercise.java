@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Определить, сколько существует способов добраться с нулевой до N ступеней с шагом 1, 2, 3.
@@ -14,16 +15,30 @@ public class LadderExercise {
      * ...
      */
     // Количество сутпеней
-    private static final int N = 4;
+    private static final int N = 7;
+    private static ArrayList<Integer> cache = new ArrayList<Integer>();
 
     public static void main(String[] args) {
-        System.out.println(count(N));
+        cache.add(0, 1);
+        System.out.println(countWithCache(N));
     }
 
-    private static int count(int value) {
+    private static int countWithCache(int value) {
+        if (value < 0) return 0;
+        if (value == 0) return cache.get(0);
+
+        try {
+            return cache.get(value);
+        } catch (Exception e) {
+            cache.add(value, countWithCache(value - 1) + countWithCache(value - 2) + countWithCache(value - 3));
+            return cache.get(value);
+        }
+    }
+
+    private static int countWithoutCache(int value) {
         if (value < 0) return 0;
         if (value == 0) return 1;
 
-        return count(value - 1) + count(value - 2) + count(value - 3);
+        return countWithoutCache(value - 1) + countWithoutCache(value - 2) + countWithoutCache(value - 3);
     }
 }
