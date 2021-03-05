@@ -1,3 +1,4 @@
+package initlesson;
 
 /**
  * Написать функцию int updateBit(int num, int i) - установить bit == 1 в числе num по позиции i.

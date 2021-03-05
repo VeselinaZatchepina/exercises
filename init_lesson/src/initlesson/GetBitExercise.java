@@ -1,3 +1,4 @@
+package initlesson;
 
 /**
  * Написать функцию int getBit (int num, int i) для получения i-го бита числа num.
