@@ -14,7 +14,7 @@ public class InsertNumber {
     private static final int END = 3;
 
     public static void main(String[] args) {
-        System.out.println(insertNumber(A, B, START, END));
+        System.out.println(insertNumber2(A, B, START, END));
     }
 
     private static int insertNumber(int whereInsertNum, int forInsertNum, int start, int end) {
@@ -27,5 +27,23 @@ public class InsertNumber {
 
         // Вставляем нужные биты
         return whereInsertNum | (forInsertNum << start);
+    }
+
+    private static int insertNumber2(int whereInsertNum, int forInsertNum, int start, int end) {
+
+        // Единцы сдвигаем на end + 1 -> 11110000
+        int leftPartOfMask = ~0 << (end + 1);
+        // Единцу сдвигаем на start и вычитаем 1 -> 00011
+        int rightPartOfMask = ((1 << start) - 1);
+        // Получаем маску с обнуленными битами по нужным индексам -> 11110011
+        int mask = leftPartOfMask | rightPartOfMask;
+
+        // Обнуляем в числе куда надо вставить биты по нужным позициям
+        int whereInsertNumCleared = whereInsertNum & mask;
+        // Сдвигаем число для вставки на нужную позицию (start)
+        int forInsertNumShifted = forInsertNum << start;
+
+        // Устанавливаем биты
+        return whereInsertNumCleared | forInsertNumShifted;
     }
 }
