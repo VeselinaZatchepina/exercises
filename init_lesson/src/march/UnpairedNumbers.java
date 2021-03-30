@@ -1,18 +1,20 @@
 package march;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Найти 2 непарных числа в массиве.
  */
 public class UnpairedNumbers {
 
-    private static int[] tempArray = new int[]{2, 2, 1, 4, 4, 5, 1, 6};
+    private static int[] tempArray = new int[]{2, 2, 1, 4, 4, 5, 1, 6, 1};
 
     public static void main(String[] args) {
 
-        System.out.println(getUnpairedNumbers());
+        System.out.println(getUnpairedNumbers2());
     }
 
     /**
@@ -45,6 +47,25 @@ public class UnpairedNumbers {
             if (currentUnpairedNumber != null) {
                 unpairedNumbers.add(currentUnpairedNumber);
                 currentUnpairedNumber = null;
+            }
+        }
+
+        return unpairedNumbers;
+    }
+
+    private static List<Integer> getUnpairedNumbers2() {
+
+        HashMap<Integer, Integer> numbersMap = new HashMap<>();
+        ArrayList<Integer> unpairedNumbers = new ArrayList<Integer>();
+
+        for (int value : tempArray) {
+            numbersMap.put(value, numbersMap.getOrDefault(value, 0) + 1);
+        }
+
+        for (Map.Entry<Integer, Integer> e : numbersMap.entrySet()) {
+            // Если количество повторений цифры  % 2 != 0, то она не парная
+            if (e.getValue() % 2 != 0) {
+                unpairedNumbers.add(e.getKey());
             }
         }
 
