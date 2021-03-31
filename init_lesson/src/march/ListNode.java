@@ -4,6 +4,7 @@ public class ListNode {
 
     int value;
     ListNode nextNode = null;
+    ListNode previousNode = null;
 
     public ListNode(int value) {
         this.value = value;
