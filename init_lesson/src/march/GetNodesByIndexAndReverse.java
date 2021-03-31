@@ -41,7 +41,7 @@ public class GetNodesByIndexAndReverse {
                 endNode = newNode;
                 previousNode = newNode;
 
-                // Если индекс == startIndex, то возвращаем tail
+                // Если индекс == endIndex, то возвращаем tail
             } else if (currentIndex == endIndex + 1) {
                 return endNode;
 
