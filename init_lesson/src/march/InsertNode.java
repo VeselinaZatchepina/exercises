@@ -1,5 +1,8 @@
 package march;
 
+/**
+ * Вставить число в упорядоченный связный список.
+ */
 public class InsertNode {
 
     public static void main(String[] args) {
@@ -14,7 +17,7 @@ public class InsertNode {
         ListNode node5 = new ListNode(5);
         node4.nextNode = node5;
 
-        insertValue(node1, 4);
+        insertValue(node1, 6);
 
         ListNode.print(node1);
     }
@@ -30,6 +33,11 @@ public class InsertNode {
                 previousNode.nextNode = newNode;
                 newNode.nextNode = head;
                 break;
+            }
+
+            if (head.nextNode == null) {
+                head.nextNode = new ListNode(value);
+                return;
             }
 
             previousNode = head;
