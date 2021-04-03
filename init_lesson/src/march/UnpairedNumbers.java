@@ -10,11 +10,11 @@ import java.util.Map;
  */
 public class UnpairedNumbers {
 
-    private static int[] tempArray = new int[]{2, 2, 1, 4, 4, 5, 1, 6, 1};
+    private static int[] tempArray = new int[]{2, 2, 1, 4, 4, 5, 1, 7, 5, 3};
 
     public static void main(String[] args) {
 
-        System.out.println(getUnpairedNumbers2());
+        System.out.println(getUnpairedNumbers3());
     }
 
     /**
@@ -68,6 +68,35 @@ public class UnpairedNumbers {
                 unpairedNumbers.add(e.getKey());
             }
         }
+
+        return unpairedNumbers;
+    }
+
+    private static List<Integer> getUnpairedNumbers3() {
+
+        ArrayList<Integer> unpairedNumbers = new ArrayList<Integer>();
+
+        // xor двух непарных элементов
+        int xor = 0;
+        for (int value : tempArray) {
+            xor ^= value;
+        }
+
+        // изменяем результат на некоторую величину
+        int new_xor = xor & ~(xor - 1);
+
+        int x = 0;
+        int y = 0;
+        for (int value : tempArray) {
+            if ((value & new_xor) == new_xor) {
+                x = x ^ value;
+            } else {
+                y = y ^ value;
+            }
+        }
+
+        unpairedNumbers.add(x);
+        unpairedNumbers.add(y);
 
         return unpairedNumbers;
     }
